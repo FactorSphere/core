@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/theme-init.js"></script>
+    <title>Journal Recommender - FactorSphere</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../src/img/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="page-container">
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../../src/img/logo_cr.png" alt="FactorSphere Logo" class="nav-logo">
+                <div class="logo-text">
+                    <h1>FactorSphere</h1>
+                    <p>Journal Recommender</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="../../index.html">Home</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="recommender-page">
+        <section class="recommender-hero">
+            <h1>AI Journal Recommender</h1>
+            <p class="hero-tagline">Find the perfect journal for your research using our AI-powered recommendation system.</p>
+        </section>
+
+        <div class="recommender-container">
+            <div class="input-section">
+                <textarea id="abstractInput" 
+                          class="abstract-input" 
+                          placeholder="Paste your abstract here to get personalized journal recommendations..."
+                          rows="6"></textarea>
+                <button id="submitBtn" class="primary-button">
+                    <i class="fas fa-magic"></i>
+                    Get Recommendations
+                </button>
+            </div>
+
+            <div id="results" class="results-grid"></div>
+        </div>
+    </main>
+
+    <script src="../js/recommender.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
