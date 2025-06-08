@@ -4,3 +4,4 @@ faiss-cpu
 torch==2.2.2+cpu
 sentence-transformers
 flask
+flask-cors
