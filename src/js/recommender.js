@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const abstract = document.getElementById("abstractInput").value.trim();
     if (!abstract) return alert("Please paste an abstract.");
 
-    const response = await fetch("http://127.0.0.1:5000/recommend", {
+    const response = await fetch("https://journal-recommender-460278901939.asia-south1.run.app/recommend", {
+
  
       method: "POST",
       headers: { "Content-Type": "application/json" },
