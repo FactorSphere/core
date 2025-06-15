@@ -21,9 +21,18 @@ async function loadDictionary() {
 // Main initialization
 document.addEventListener('DOMContentLoaded', async () => {
     const dictionary = await loadDictionary();
-    initializeTheme();
     initializeSearch();
     loadJournalRankings(dictionary);
+
+    // Route hero search button to nav search button
+    const heroSearchButton = document.getElementById('heroSearchButton');
+    const navSearchButton = document.getElementById('searchButton');
+    
+    if (heroSearchButton && navSearchButton) {
+        heroSearchButton.addEventListener('click', () => {
+            navSearchButton.click();
+        });
+    }
 });
 
 function initializeTheme() {
@@ -303,3 +312,8 @@ function createJournalCard(journal, isRanking, dictionary) {
 
     return journalElement;
 }
+
+// Hero button reuses nav button's functionality
+heroSearchButton.addEventListener('click', () => {
+    navSearchButton.click();
+});
