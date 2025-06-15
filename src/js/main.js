@@ -278,7 +278,7 @@ function createJournalCard(journal, isRanking, dictionary) {
             ${isRanking ? `
                 <div class="impact-score" title="${dictionary['OOIR_IF'].full}">
                     <i class="fas fa-chart-line"></i>
-                    ${dictionary['OOIR_IF'].short}: ${journal.OOIR_IF?.toFixed(2) || 'N/A'}
+                    Impact Factor (IF): ${journal.OOIR_IF?.toFixed(2) || 'N/A'}
                 </div>
             ` : `
                 <div class="citations" title="${dictionary['OA_Cited By Count'].full}">
