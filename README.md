@@ -34,14 +34,42 @@ FactorSphere is a personal project aimed at democratizing academic journal ranki
 - H-index tracking
 - Citation analytics
 
+### AI Journal Recommender (Beta)
+
+Find the perfect journal for your research using our AI-powered recommendation system:
+- Semantic search using PineCone vector database
+- Fast and accurate matching using embeddings
+- Sorted by Impact Factor (IF)
+- Real-time field matching
+
 ## Technology Stack
 
-- **Frontend**: Vanilla JavaScript (ES6+)
-- **Styling**: Custom CSS with CSS Variables
-- **Data**: JSON-based storage
-- **Icons**: Font Awesome 6.0
-- **Typography**: Google's Rubik font family
-- **Theme**: GitHub-inspired design system
+### Frontend
+- Pure JavaScript, HTML5, CSS3
+- Responsive design with CSS Grid/Flexbox
+- Theme switching (light/dark mode)
+- Client-side data processing
+
+### Backend (Recommendations)
+- Cloudflare Workers for serverless deployment
+- PineCone Vector Database for semantic search
+- OpenAI embeddings for text processing
+- Cross-Origin Resource Sharing (CORS) enabled
+- Response format:
+  ```json
+  {
+    "matches": [
+      {
+        "metadata": {
+          "journal_name": "journal title",
+          "discipline": "field1, field2, ...",
+          "OOIR_IF": "impact factor"
+        },
+        "score": 0.875
+      }
+    ]
+  }
+  ```
 
 ## Project Structure
 
@@ -111,8 +139,8 @@ Join our [GitHub Discussions](https://github.com/FactorSphere/core/discussions) 
 ### Current Sources
 - OpenAlex API for citation metrics
 - SCImago Journal Rank (SJR)
-- OOIR.org for Impact Factors
-- Community-contributed data
+- AI Recommendations via PineCone Vector DB
+- Community contributions
 
 ### Verification Process
 1. Automated data validation
