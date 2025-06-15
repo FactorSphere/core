@@ -1,79 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Factorsphere Journal Recommender</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
-      max-width: 600px;
-      margin: auto;
-    }
-    textarea {
-      width: 100%;
-      height: 200px;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 20px;
-      font-size: 16px;
-    }
-    .result {
-      margin-top: 30px;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/theme-init.js"></script>
+    <title>Journal Recommender - FactorSphere</title>
+    
+    <link rel="icon" type="image/svg+xml" href="../../src/img/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="page-container">
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="../../src/img/logo_cr.png" alt="FactorSphere Logo" class="nav-logo">
+                <div class="logo-text">
+                    <h1>FactorSphere</h1>
+                    <p>Journal Recommender</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="../../index.html">Home</a>
+            </div>
+        </nav>
+    </header>
 
-  <h1>Factorsphere Journal Recommender</h1>
+    <main class="recommender-page">
+        <section class="recommender-hero">
+            <h1>AI Journal Recommender</h1>
+            <p class="hero-tagline">Find the perfect journal for your research using our AI-powered recommendation system.</p>
+        </section>
 
-  <p>Paste your abstract below:</p>
+        <div class="recommender-container">
+            <div class="input-section">
+                <div class="loading-indicator" style="display: none;">
+                    <i class="fas fa-circle-notch fa-spin"></i>
+                    <span>Finding matches...</span>
+                </div>
+                <textarea id="abstractInput" 
+                          class="abstract-input" 
+                          placeholder="Paste your abstract here to get personalized journal recommendations..."
+                          rows="6"></textarea>
+                <button id="submitBtn" class="primary-button">
+                    <i class="fas fa-magic"></i>
+                    Get Recommendations
+                </button>
+            </div>
+            
+            <!-- Add Raw Results Section -->
+            <div class="results-wrapper">
+                <div class="raw-results collapsed">
+                    <button class="collapse-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                        Show AI Response
+                    </button>
+                    <div class="collapsible-content">
+                        <h3>AI Response</h3>
+                        <pre id="rawResults" class="raw-output"></pre>
+                    </div>
+                </div>
+                <div id="results" class="results-grid"></div>
+            </div>
+        </div>
+    </main>
 
-  <textarea id="abstract"></textarea><br>
+    <!-- Add Search Modal -->
+    <div id="searchModal" class="search-modal">
+        <div class="search-modal-content">
+            <button id="closeModal" class="close-button">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2>Search Journals</h2>
+            <div class="search-box">
+                <input type="text" id="modalJournalSearch" placeholder="Search by journal name or ISSN...">
+            </div>
+            <div class="search-filters">
+                <select id="fieldFilter">
+                    <option value="">All Fields</option>
+                </select>
+                <select id="sortFilter">
+                    <option value="impact">Sort by Impact Factor</option>
+                    <option value="name">Sort by Name</option>
+                </select>
+            </div>
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
 
-  <button onclick="submit()">Get Recommendations</button>
+    <script src="../js/recommender.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/details.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const resultsContainer = document.getElementById('results');
+            let isFirstLoad = true;
 
-  <div id="output" class="result"></div>
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    // Only sort on first load of results
+                    if (isFirstLoad && mutation.addedNodes.length) {
+                        isFirstLoad = false;
+                        // Temporarily disconnect observer to prevent loops
+                        observer.disconnect();
+                        
+                        const cards = Array.from(resultsContainer.getElementsByClassName('recommendation-card'));
+                        const sortedCards = cards.sort((a, b) => {
+                            const aIF = parseFloat(a.querySelector('.metrics p:first-child').textContent.split(':')[1]) || 0;
+                            const bIF = parseFloat(b.querySelector('.metrics p:first-child').textContent.split(':')[1]) || 0;
+                            return bIF - aIF;
+                        });
+                        
+                        // Clear and re-append sorted cards
+                        resultsContainer.innerHTML = '';
+                        sortedCards.forEach(card => resultsContainer.appendChild(card));
+                        
+                        // Reconnect observer
+                        observer.observe(resultsContainer, { childList: true });
+                    }
+                });
+            });
 
-  <script>
-    async function submit() {
-      const abstract = document.getElementById("abstract").value;
-      const output = document.getElementById("output");
-      output.innerHTML = "Processing...";
-
-      try {
-        const response = await fetch("https://factorsphere.sameermann2004.workers.dev", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ abstract: abstract })
+            observer.observe(resultsContainer, { childList: true });
         });
-
-        if (!response.ok) {
-          output.innerHTML = `Error: ${response.statusText}`;
-          return;
-        }
-
-        const data = await response.json();
-
-        if (!data.matches || data.matches.length === 0) {
-          output.innerHTML = "No matches found.";
-          return;
-        }
-
-        output.innerHTML = "<h3>Top Matches:</h3>";
-        data.matches.forEach(match => {
-          const metadata = match.metadata;
-          output.innerHTML += `<p><strong>${metadata["OA_Journal Name"] || metadata["SCIMAGO_Title"]}</strong> (Score: ${match.score.toFixed(3)})</p>`;
-        });
-
-      } catch (err) {
-        output.innerHTML = `Error: ${err}`;
-      }
-    }
-  </script>
-
+    </script>
 </body>
 </html>
