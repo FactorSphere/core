@@ -158,7 +158,7 @@
     </main>
 
     <!-- Original search modal -->
-    <div id="searchModal" class="search-modal">
+    <div id="searchModal" class="search-modal" style="display: none;">
         <div class="search-modal-content">
             <div class="search-modal-header">
                 <h2>Search Journals</h2>
@@ -206,10 +206,6 @@
     </template>
 
     <script src="src/js/main.js"></script>
-    <script>
-        document.getElementById('heroSearchButton').addEventListener('click', () => {
-            document.getElementById('searchButton').click();
-        });
-    </script>
+    <script src="src/js/search.js"></script>
 </body>
 </html>

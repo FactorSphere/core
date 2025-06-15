@@ -40,9 +40,14 @@
 
         <div class="recommender-container">
             <div class="input-section">
+                <!-- Updated loading indicator -->
                 <div class="loading-indicator" style="display: none;">
-                    <i class="fas fa-circle-notch fa-spin"></i>
-                    <span>Finding matches...</span>
+                    <div class="loading-spinner">
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-text">Finding matches</div>
+                    </div>
                 </div>
                 <textarea id="abstractInput" 
                           class="abstract-input" 
@@ -71,32 +76,8 @@
         </div>
     </main>
 
-    <!-- Add Search Modal -->
-    <div id="searchModal" class="search-modal">
-        <div class="search-modal-content">
-            <button id="closeModal" class="close-button">
-                <i class="fas fa-times"></i>
-            </button>
-            <h2>Search Journals</h2>
-            <div class="search-box">
-                <input type="text" id="modalJournalSearch" placeholder="Search by journal name or ISSN...">
-            </div>
-            <div class="search-filters">
-                <select id="fieldFilter">
-                    <option value="">All Fields</option>
-                </select>
-                <select id="sortFilter">
-                    <option value="impact">Sort by Impact Factor</option>
-                    <option value="name">Sort by Name</option>
-                </select>
-            </div>
-            <div id="searchResults" class="search-results"></div>
-        </div>
-    </div>
-
+    <!-- Remove search modal and keep only necessary scripts -->
     <script src="../js/recommender.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/details.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const resultsContainer = document.getElementById('results');
