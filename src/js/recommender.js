@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function () {
         rawResultsElement.textContent = "";
 
         try {
-            const response = await fetch("https://factorsphere.sameermann2004.workers.dev", {
+            const response = await fetch("https://backend.factorsphere.workers.dev", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ abstract })
