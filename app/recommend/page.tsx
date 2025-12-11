@@ -108,7 +108,7 @@ export default function RecommendPage() {
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
+              <img src="/bot.png" alt="Bot" className="w-8 h-8" />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-foreground">AI Journal Recommender</h1>

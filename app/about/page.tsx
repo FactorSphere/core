@@ -15,9 +15,7 @@ export default function AboutPage() {
 
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
-            </div>
+            <img src="/owl.png" alt="Owl" className="w-10 h-10" />
             <h1 className="text-3xl font-bold text-foreground">About FactorSphere</h1>
           </div>
           <p className="text-lg text-muted-foreground">
