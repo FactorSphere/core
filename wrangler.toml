@@ -1,0 +1,5 @@
+name = "factorsphere"
+compatibility_date = "2025-12-11"
+
+[pages]
+pages_build_output_dir = ".vercel/output"
