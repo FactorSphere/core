@@ -2,84 +2,40 @@
 
 A community-driven academic journal ranking platform with transparent methodology and real-time updates.
 
-## Deployment on Cloudflare Pages
+## Overview
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- Cloudflare account
+FactorSphere provides comprehensive rankings and metrics for academic journals across various fields. The platform combines multiple ranking factors to give researchers, institutions, and students a clear view of journal quality and impact.
 
-### Build and Export Commands
+## Key Features
 
-The project is configured for static export and can be deployed using:
+- **Transparent Methodology**: All ranking factors and calculations are openly documented
+- **Real-time Updates**: Journal rankings are updated regularly with the latest data
+- **Multi-dimensional Rankings**: Combines citation metrics, peer review scores, and impact factors
+- **Field-specific Rankings**: Specialized rankings for different academic disciplines
+- **Search and Filter**: Advanced search capabilities to find journals by field, impact, or ranking
 
-```bash
-npm run build && npm run export
-```
+## Ranking Factors
 
-This will:
-1. Build the Next.js application with static export configuration
-2. Generate static HTML files in the `out/` directory
-3. Create optimized bundles for all pages
+The platform considers multiple metrics to provide comprehensive journal rankings:
 
-### Manual Deployment to Cloudflare Pages
+- **Impact Factor**: Standard citation-based metric
+- **CiteScore**: Alternative citation metric from Scopus
+- **SNIP**: Source Normalized Impact per Paper
+- **SJR**: SCImago Journal Rank
+- **Peer Review Quality**: Community-based assessment
+- **Publication Speed**: Average time from submission to publication
 
-1. **Build the project locally:**
-   ```bash
-   npm run build && npm run export
-   ```
+## Data Sources
 
-2. **Upload to Cloudflare Pages:**
-   - Go to Cloudflare Dashboard > Pages
-   - Create a new project > Upload assets
-   - Drag and drop the contents of the `out/` directory
-   - Set build settings (not needed for static sites)
-   - Deploy
+FactorSphere aggregates data from multiple academic databases and indexing services to ensure comprehensive and accurate rankings.
 
-3. **Or use Wrangler CLI:**
-   ```bash
-   npx wrangler pages deploy out --project-name factorsphere
-   ```
+## Technology Stack
 
-### Automatic Deployment (Git Integration)
+- **Next.js**: Modern React framework for static site generation
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first CSS framework
+- **Sharp**: Image processing for favicon generation
 
-1. Push your code to a Git repository (GitHub/GitLab)
-2. In Cloudflare Pages, connect your repository
-3. Set the build configuration:
-   - **Build command:** `npm run build && npm run export`
-   - **Build output directory:** `out`
-   - **Node.js version:** `18` or higher
+## Getting Started
 
-### Project Structure
-
-- `out/` - Static build output (generated)
-- `app/` - Next.js app router pages
-- `components/` - React components
-- `public/` - Static assets and data files
-- `hooks/` - Custom React hooks for data fetching
-
-### Configuration Details
-
-The project uses Next.js static export mode with:
-- `output: 'export'` in next.config.mjs
-- `trailingSlash: true` for proper routing
-- `distDir: 'out'` for build output
-- Static generation for popular journal routes
-- Client-side fallback for dynamic journal routes
-
-### Data Files
-
-- `public/factorsphere_data.json` - Journal database (8MB)
-- `public/dictionary.csv` - Field definitions
-- These files are included in the static build
-
-### Environment Variables
-
-No environment variables are required for static deployment.
-
-### Performance Notes
-
-- The build generates static pages for 5 popular journals
-- Dynamic journal routes redirect to a fallback page
-- All data is bundled into the static build
-- Images are unoptimized for static compatibility
+The platform is deployed as a static site for optimal performance and accessibility. Visit the live site to explore journal rankings and detailed metrics.
