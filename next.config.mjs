@@ -9,9 +9,12 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Only use export mode in production
+  ...(process.env.NODE_ENV === 'production' && {
+    output: 'export',
+    trailingSlash: true,
+    distDir: 'out',
+  }),
 }
-
-import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
-initOpenNextCloudflareForDev();
 
 export default nextConfig

@@ -91,7 +91,7 @@ export default function RecommendPage() {
   }
 
   const handleJournalClick = (issn: string) => {
-    window.open(`/journal/${encodeURIComponent(issn)}`, '_blank')
+    window.open(`/journal?id=${encodeURIComponent(issn)}`, '_blank')
   }
 
   return (

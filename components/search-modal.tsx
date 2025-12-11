@@ -56,7 +56,7 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
 
   const handleJournalClick = (issn: string) => {
     onOpenChange(false)
-    router.push(`/journal/${encodeURIComponent(issn)}`)
+    router.push(`/journal?id=${encodeURIComponent(issn)}`)
   }
 
   return (

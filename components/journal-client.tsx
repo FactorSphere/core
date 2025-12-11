@@ -1,19 +1,17 @@
 "use client"
 
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowLeft, ExternalLink, TrendingUp, Quote, BarChart3, FileText, BookOpen, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useJournalById } from "@/hooks/use-journal-data"
 
-interface JournalPageProps {
-  params: Promise<{ id: string }>
+interface JournalClientProps {
+  journalId: string
 }
 
-export default function JournalDetailPage({ params }: JournalPageProps) {
-  const { id } = use(params)
-  const decodedId = decodeURIComponent(id)
-  const { journal, isLoading } = useJournalById(decodedId)
+export default function JournalClient({ journalId }: JournalClientProps) {
+  const { journal, isLoading } = useJournalById(journalId)
   const [faviconUrl, setFaviconUrl] = useState<string | null>(null)
 
   useEffect(() => {

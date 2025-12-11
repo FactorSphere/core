@@ -14,7 +14,7 @@ export function JournalCard({ journal, showImpactFactor = true, dictionary = {} 
   const router = useRouter()
 
   const handleClick = () => {
-    router.push(`/journal/${encodeURIComponent(journal["OA_ISSN-L"])}`)
+    router.push(`/journal?id=${encodeURIComponent(journal["OA_ISSN-L"])}`)
   }
 
   return (

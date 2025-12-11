@@ -27,7 +27,7 @@ export default function TheListPage() {
   const hasMore = displayedJournals.length < sortedJournals.length
 
   const handleJournalClick = useCallback((issn: string) => {
-    router.push(`/journal/${encodeURIComponent(issn)}`)
+    router.push(`/journal?id=${encodeURIComponent(issn)}`)
   }, [router])
 
   const loadMore = useCallback(() => {
